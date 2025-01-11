@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function App() {
+function App({ setIsAuthenticated }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -20,14 +21,17 @@ function App() {
       const result = await response.json();
       if (response.ok && result.success) {
         alert("Login successful!");
+        setIsAuthenticated(true);
         navigate("/protected");
       } else {
         alert("Login failed!");
+        setIsAuthenticated(false);
         navigate("/");
       }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred!");
+      setIsAuthenticated(false);
       navigate("/");
     }
   }

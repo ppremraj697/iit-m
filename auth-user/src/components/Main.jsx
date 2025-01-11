@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
+import { useState } from "react";
 import App from "../App";
 
 function ProtectedPage() {
@@ -10,11 +12,23 @@ function HomePage() {
 }
 
 export default function Main() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/protected" element={<ProtectedPage />} />
-      <Route path="/login" element={<App />} />
+      <Route
+        path="/login"
+        element={<App setIsAuthenticated={setIsAuthenticated} />}
+      />
+      <Route
+        path="/protected"
+        element={
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ProtectedPage />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

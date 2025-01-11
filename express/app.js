@@ -8,9 +8,9 @@ app.use(express.json());
 const hardcodedEmail = "test@example.com";
 const hardcodedPassword = "password123";
 
-app.get("/", function(req, res){
-    res.send("Home Page of Express Server")
-})
+app.get("/", function (req, res) {
+  res.send("Home Page of Express Server");
+});
 
 app.post("/create", (req, res) => {
   const { email, password } = req.body;
